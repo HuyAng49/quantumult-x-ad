@@ -1,7 +1,5 @@
-console.log($response)
 console.log('解析开始')
-if ($response) {
-    if ($response.body) {
+if ($response.body) {
         console.log($response.body)
         try {
             let jsonBody = JSON.parse($response.body);
@@ -28,7 +26,3 @@ if ($response) {
         console.log("Response body is empty");
         $done({});
     }
-} else {
-    console.log("Invalid $response object");
-    $done({});
-}
