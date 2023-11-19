@@ -1,4 +1,5 @@
-console.log($response,'1111')
+console.log($response)
+console.log('解析开始')
 if ($response) {
     if ($response.body) {
         console.log($response.body,'2222')
