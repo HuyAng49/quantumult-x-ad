@@ -1,8 +1,6 @@
 if ($response && $response.body) {
-    let body = $response.body;
-
     try {
-        let jsonBody = JSON.parse(body);
+        let jsonBody = JSON.parse($response.body);
 
         // 检查是否存在 "data" 和 "extra_entities" 字段
         if (jsonBody && jsonBody.data && jsonBody.data.extra_entities) {
@@ -10,13 +8,15 @@ if ($response && $response.body) {
             jsonBody.data.extra_entities = [];
             
             // 更新响应体
-            body = JSON.stringify(jsonBody);
+            $done({ body: JSON.stringify(jsonBody) });
+        } else {
+            console.log("Invalid JSON structure or missing fields");
+            $done({});
         }
     } catch (error) {
         console.log("Error parsing JSON:", error);
+        $done({});
     }
-
-    $done({ body });
 } else {
     console.log("Invalid $response object or missing body");
     $done({});
